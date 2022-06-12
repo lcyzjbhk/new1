@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.itheima.dao.impl.BookDaoImpl"/>
-    <!--autowire属性：开启自动装配，通常使用按类型装配-->
-    <bean id="bookService" class="com.itheima.service.impl.BookServiceImpl" autowire="byType"/>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-beans.xsd">
+
+      <context:property-placeholder location="classpath:db.properties"/>
+     <context:component-scan base-package="com.itheima"/>
+      <bean class="com.alibaba.druid.pool.DruidDataSource">
+          <property name="driverClassName" value="${driver}"/>
+          <property name="url" value="${url}"/>
+          <property name="username" value="${usr}"/>
+          <property name="password" value="${pwd}"/>
+      </bean>
 
 </beans>
